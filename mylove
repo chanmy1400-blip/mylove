@@ -1,0 +1,125 @@
+body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color: #ffe6e6;
+        font-family: 'Arial', sans-serif;
+        text-align: center;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .greeting {
+        color: #ff4d4d;
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    h1 { 
+        color: #ff4d4d; 
+        margin-bottom: 30px; 
+        padding: 0 20px; 
+        font-size: 32px;
+    }
+
+    .container {
+        width: 100%;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+
+    .buttons {
+        display: flex;
+        gap: 20px;
+        z-index: 10;
+    }
+
+    button {
+        padding: 15px 30px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 15px;
+        border: none;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        transition: transform 0.1s ease;
+    }
+
+    #yesBtn { background-color: #28a745; color: white; }
+
+    #noBtn { 
+        background-color: #dc3545; 
+        color: white; 
+        position: relative; 
+        touch-action: none;
+    }
+
+    #yesScreen { 
+        display: none; 
+        flex-direction: column; 
+        align-items: center; 
+        padding: 20px;
+    }
+
+    img { width: 80%; max-width: 220px; border-radius: 20px; margin-bottom: 20px; }
+</style>
+<div id="mainScreen">
+    <!-- ပုံနေရာ -->
+    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpwaGZ4azR3eGZ4Zng0eGZ4Zng0eGZ4Zng0eGZ4Zng0eGZ4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/KztT2c4u8mYYUiCiS0/giphy.gif" alt="Cute Bear">
+    
+    <!-- အသစ်ထည့်ထားသော စာသား -->
+    <div class="greeting">Hey Ju Ju 💕</div>
+    
+    <h1>Will you be my Valentine? ❤️</h1>
+    
+    <div class="container">
+        <div class="buttons">
+            <button id="yesBtn">Yes</button>
+            <button id="noBtn">No</button>
+        </div>
+    </div>
+</div>
+
+<div id="yesScreen">
+    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpwaGZ4azR3eGZ4Zng0eGZ4Zng0eGZ4Zng0eGZ4Zng0eGZ4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/KztT2c4u8mYYUiCiS0/giphy.gif" alt="Happy Cat">
+    <h1>Yayyy! I Love You! 🥰</h1>
+    <p>See you on Feb 14!</p>
+</div>
+
+<script>
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const mainScreen = document.getElementById("mainScreen");
+    const yesScreen = document.getElementById("yesScreen");
+
+    yesBtn.addEventListener("click", () => {
+        mainScreen.style.display = "none";
+        yesScreen.style.display = "flex";
+    });
+
+    function moveButton() {
+        const padding = 50;
+        const maxWidth = window.innerWidth - noBtn.offsetWidth - padding;
+        const maxHeight = window.innerHeight - noBtn.offsetHeight - padding;
+
+        noBtn.style.position = "fixed"; 
+        
+        const randomX = Math.max(padding, Math.floor(Math.random() * maxWidth));
+        const randomY = Math.max(padding, Math.floor(Math.random() * maxHeight));
+
+        noBtn.style.left = randomX + "px";
+        noBtn.style.top = randomY + "px";
+    }
+
+    noBtn.addEventListener("mouseover", moveButton);
+    noBtn.addEventListener("touchstart", (e) => {
+        e.preventDefault();
+        moveButton();
+    });
+</script>
